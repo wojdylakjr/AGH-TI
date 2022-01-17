@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="test.xsl"?>
+<rozgrywki>
+	<grupa>
+		<numer_grupy>Grupa A</numer_grupy>
+		<druzyna>
+      <pozycja>1.</pozycja>
+			<nazwa>Manchester City</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>3</zwyciestwa>
+      <remisy>0</remisy>
+      <porazki>1</porazki>
+      <bilans>15:7</bilans>
+      <punkty>9</punkty>
+		</druzyna>
+		<druzyna>
+      <pozycja>2.</pozycja>
+			<nazwa>PSG</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>2</zwyciestwa>
+      <remisy>2</remisy>
+      <porazki>0</porazki>
+      <bilans>8:5</bilans>
+      <punkty>8</punkty>
+		</druzyna>
+		<druzyna>
+      <pozycja>3.</pozycja>
+			<nazwa>Club Brugge</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>1</zwyciestwa>
+      <remisy>1</remisy>
+      <porazki>2</porazki>
+      <bilans>5:11</bilans>
+      <punkty>4</punkty>
+		</druzyna>
+		<druzyna>
+      <pozycja>4.</pozycja>
+			<nazwa>RB Lipsk</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>0</zwyciestwa>
+      <remisy>1</remisy>
+      <porazki>3</porazki>
+      <bilans>8:13</bilans>
+      <punkty>1</punkty>
+		</druzyna>
+	</grupa>
+
+	<grupa>
+		<numer_grupy>Grupa B</numer_grupy>
+		<druzyna>
+      <pozycja>1.</pozycja> 
+			<nazwa>Liverpoool</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>4</zwyciestwa>
+      <remisy>0</remisy>
+      <porazki>0</porazki>
+      <bilans>13:5</bilans>
+      <punkty>12</punkty>
+		</druzyna>
+		<druzyna>
+      <pozycja>2.</pozycja>
+			<nazwa>FC Porto</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>1</zwyciestwa>
+      <remisy>2</remisy>
+      <porazki>1</porazki>
+      <bilans>3:6</bilans>
+      <punkty>5</punkty>
+		</druzyna>
+		<druzyna>
+      <pozycja>3.</pozycja>
+			<nazwa>Atletico Madryt</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>1</zwyciestwa>
+      <remisy>1</remisy>
+      <porazki>2</porazki>
+      <bilans>4:6</bilans>
+      <punkty>4</punkty>
+		</druzyna>
+		<druzyna>
+      <pozycja>4.</pozycja>
+			<nazwa>AC Milan</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>0</zwyciestwa>
+      <remisy>1</remisy>
+      <porazki>3</porazki>
+      <bilans>4:7</bilans>
+      <punkty>1</punkty>
+		</druzyna>
+	</grupa>
+
+
+	<grupa>
+		<numer_grupy>Grupa C</numer_grupy>
+		<druzyna>
+      <pozycja>1.</pozycja>
+			<nazwa>Ajax</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>4</zwyciestwa>
+      <remisy>0</remisy>
+      <porazki>0</porazki>
+      <bilans>14:2</bilans>
+      <punkty>12</punkty>
+		</druzyna>
+		<druzyna>
+      <pozycja>2.</pozycja>
+			<nazwa>Borussia </nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>2</zwyciestwa>
+      <remisy>0</remisy>
+      <porazki>2</porazki>
+      <bilans>4:8</bilans>
+      <punkty>6</punkty>
+		</druzyna>
+		<druzyna>
+      <pozycja>3.</pozycja>
+			<nazwa>Sporting</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>2</zwyciestwa>
+      <remisy>0</remisy>
+      <porazki>2</porazki>
+      <bilans>9:7</bilans>
+      <punkty>6</punkty>
+		</druzyna>
+		<druzyna>
+      <pozycja>4.</pozycja>
+			<nazwa>Beskitas</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>0</zwyciestwa>
+      <remisy>0</remisy>
+      <porazki>4</porazki>
+      <bilans>2:12</bilans>
+      <punkty>0</punkty>
+		</druzyna>
+	</grupa>
+
+  	<grupa>
+		<numer_grupy>Grupa D</numer_grupy>
+		<druzyna>
+      <pozycja>1.</pozycja>
+			<nazwa>Real Madryt</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>3</zwyciestwa>
+      <remisy>0</remisy>
+      <porazki>1</porazki>
+      <bilans>9:3</bilans>
+      <punkty>9</punkty>
+		</druzyna>
+    <druzyna>
+      <pozycja>4.</pozycja>
+			<nazwa>Szachtar</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>0</zwyciestwa>
+      <remisy>1</remisy>
+      <porazki>3</porazki>
+      <bilans>1:9</bilans>
+      <punkty>1</punkty>
+		</druzyna>
+		<druzyna>
+      <pozycja>2.</pozycja>
+			<nazwa>Inter</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>2</zwyciestwa>
+      <remisy>1</remisy>
+      <porazki>1</porazki>
+      <bilans>6:3</bilans>
+      <punkty>7</punkty>
+		</druzyna>
+		<druzyna>
+      <pozycja>3.</pozycja>
+			<nazwa>S. Tiraspol</nazwa>
+			<mecze>4</mecze>
+			<zwyciestwa>2</zwyciestwa>
+      <remisy>0</remisy>
+      <porazki>2</porazki>
+      <bilans>6:7</bilans>
+      <punkty>6</punkty>
+		</druzyna>
+		
+	</grupa>
+
+</rozgrywki>

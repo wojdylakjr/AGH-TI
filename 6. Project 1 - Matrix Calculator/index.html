@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Matrix calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <header>
+            <h1>MATRIX CALCULATOR</h1>
+        </header>
+
+        <div class="smallBox">
+
+            <div class="matrix1">
+                <h2>Matrix A</h2>
+                <div class="matrixInputs">
+                    <div class="rowsInput">
+                        <label for="rows1">Rows</label>
+                        <input type="number" id="rows1" min="1" value="2" onchange="drawMatrix1()" required>
+                    </div>
+                    <div class="colsInput">
+                        <label for="cols1">Columns</label>
+                        <input type="number" id="cols1" min="1" value="2" onchange="drawMatrix1()" required>
+                    </div>
+                    <button type="button" class="inputButton" id="inputButton1" onclick="drawMatrix1()">Submit</button>
+                </div>
+                <table id="array1"></table>
+
+                <div class="oneMatrixOptions">
+                    <button class="button2" onclick="determinate()">Determinate</button>
+                    <button class="button2" onclick="findInverseMatrix()">Inverse</button>
+                    <button class="button2" onclick="transponse()">Transponse</button>
+                    <button class="button2" onclick="methodLU()">LU</button>
+                </div>
+            </div>
+
+            <!--funkcje kalkulatora  -->
+            <div class="options">
+                <button class="button1" onclick="add()">Add</button>
+                <button class="button1" onclick="substract()">Substract</button>
+                <button class="button1" onclick="multiply()">Multiply</button>
+            </div>
+
+            <div class="matrix2">
+                <h2>Matrix B</h2>
+                <div class="matrixInputs">
+                    <div class="rowsInput">
+                        <label for="rows2">Rows</label>
+                        <input type="number" id="rows2" min="1" value="2" onchange="drawMatrix2()" required>
+                    </div>
+                    <div class="colsInput">
+                        <label for="cols2">Columns</label>
+                        <input type="number" id="cols2" min="1" value="2" onchange="drawMatrix2()" required>
+                    </div>
+                    <button type="button" class="inputButton" id="inputButton2" onclick="drawMatrix2()">Submit</button> </div>
+                <table id="array2"></table>
+            </div>
+
+        </div>
+
+
+        <!-- tablica/e z wynikiem -->
+        <div class="matrix3">
+            <h2 id="result">RESULT</h2>
+            <div class="resultMatrix">
+                <div id="array4" class="array4"></div>
+                <div style="display: inline-block;">
+                    <table id="array3"></table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        var defaultNumber = 2;
+        var table1 = document.getElementById("array1");
+        var table2 = document.getElementById("array2");
+        var button = document.getElementById("btn");
+
+        drawMatrix(table1, defaultNumber, defaultNumber);
+        drawMatrix(table2, defaultNumber, defaultNumber);
+
+        //dodanie obslugi enter w inputach
+        var input = document.getElementById("rows1");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("inputButton1").click();
+            }
+        });
+
+        var input = document.getElementById("cols1");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("inputButton1").click();
+            }
+        });
+
+        var input = document.getElementById("rows2");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("inputButton2").click();
+            }
+        });
+
+        var input = document.getElementById("cols2");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("inputButton2").click();
+            }
+        });
+
+
+        function drawMatrix1() {
+            var table = document.getElementById("array1");
+            var rowsNumber = document.getElementById("rows1").value;
+            var columnsNumber = document.getElementById("cols1").value;
+
+            if (rowsNumber < 1 || columnsNumber < 1) {
+                window.alert("Matrix dimensions must be more than 0");
+                return;
+            }
+
+            if (table.rows.length > 0) {
+                $("#array1").empty();
+            }
+            drawMatrix(table, rowsNumber, columnsNumber);
+        }
+
+
+        function drawMatrix2() {
+            var table = document.getElementById("array2");
+            var rowsNumber = document.getElementById("rows2").value;
+            var columnsNumber = document.getElementById("cols2").value;
+
+            if (rowsNumber < 1 || columnsNumber < 1) {
+                window.alert("Matrix dimensions must be more than 0");
+                return;
+            }
+
+            if (table.rows.length > 0) {
+                $("#array2").empty();
+            }
+            drawMatrix(table, rowsNumber, columnsNumber);
+        }
+
+
+        function drawMatrix(table, rows, cols) {
+            for (let i = 0; i < rows; i++) {
+                var tr = table.insertRow();
+                for (let j = 0; j < cols; j++) {
+                    var td = tr.insertCell();
+                    var cellText = document.createTextNode("");
+                    td.contentEditable = 'true';
+                    td.appendChild(cellText);
+                }
+            }
+
+            //wyjscie z komorki po nacisnieciu enter
+            $("td").on("keydown", function(e) {
+                var key = e.keyCode || e.charCode;
+                if (key == 13)
+                    $(this).blur();
+            });
+
+            //walidacja wpisania tylko liczby do komorki macierzy
+            $("td").on("keydown", function(event) {
+                if (event.which != 8 && event.which != 46 && event.which != 189 && event.which != 27 && isNaN(String.fromCharCode(event.which))) {
+                    event.preventDefault();
+                }
+            });
+
+            //po kliknieciu na komorke macierzy czyscimy jej zawartosc
+            document.querySelectorAll('#' + table.id + ' td')
+                .forEach(e => e.addEventListener("click", function() {
+                    e.innerHTML = "";
+                }));
+
+        }
+
+
+        function multiply() {
+            var table1 = document.getElementById("array1");
+            var table2 = document.getElementById("array2");
+            var rows1 = table1.rows.length;
+            var cols1 = table1.rows[0].cells.length;
+            var rows2 = table2.rows.length;
+            var cols2 = table2.rows[0].cells.length;
+
+            if (cols1 != rows2) {
+                window.alert("Matrix A does not have the same number of columns as Matrix B number of rows");
+                return;
+            }
+
+            var table3 = document.getElementById("array3");
+
+
+            if (table3.rows.length > 0) {
+                $("#array3").empty();
+            }
+            document.getElementById("result").innerHTML = "A * B";
+            document.getElementById("array4").innerHTML = "";
+
+            for (let i = 0; i < rows1; i++) {
+                var tr = table3.insertRow();
+                //wypelnienie pustych komorek macierzy zerami
+                for (let j = 0; j < cols2; j++) {
+                    if (table1.rows[i].cells[j].textContent == "") {
+                        table1.rows[i].cells[j].innerHTML = 0;
+                    }
+                    if (table2.rows[i].cells[j].textContent == "") {
+                        table2.rows[i].cells[j].innerHTML = 0;
+                    }
+                    var td = tr.insertCell();
+                    var sum = 0;
+                    for (let k = 0; k < rows2; k++) {
+                        sum += table1.rows[i].cells[k].textContent * table2.rows[k].cells[j].textContent;
+                    }
+
+                    var cellText = document.createTextNode(sum);
+                    td.appendChild(cellText);
+
+
+                }
+
+            }
+
+        }
+
+
+        function add() {
+            var table1 = document.getElementById("array1");
+            var table2 = document.getElementById("array2");
+            document.getElementById("array4").innerHTML = "";
+
+            var rows1 = table1.rows.length;
+            var cols1 = table1.rows[0].cells.length;
+            var rows2 = table2.rows.length;
+            var cols2 = table2.rows[0].cells.length;
+
+            if (rows1 != rows2 || cols1 != cols2) {
+                window.alert("Matrixes have to have the same dimensions!!!");
+                return;
+            }
+            document.getElementById("result").innerHTML = "A + B";
+
+            calculate((x, y) => +x + +y, table1, table2, rows1, cols1);
+        }
+
+
+        function substract() {
+            var table1 = document.getElementById("array1");
+            var table2 = document.getElementById("array2");
+            document.getElementById("array4").innerHTML = "";
+            var rows1 = table1.rows.length;
+            var cols1 = table1.rows[0].cells.length;
+            var rows2 = table2.rows.length;
+            var cols2 = table2.rows[0].cells.length;
+
+            if (rows1 != rows2 || cols1 != cols2) {
+                window.alert("Matrixes have to have the same dimensions!!!");
+                return;
+            }
+            document.getElementById("result").innerHTML = "A - B";
+
+            calculate((x, y) => x - y, table1, table2, rows1, cols1);
+        }
+
+
+        function calculate(func, table1, table2, rows, cols) {
+            var table3 = document.getElementById("array3");
+            if (table3.rows.length > 0) {
+                $("#array3").empty();
+            }
+
+            for (let i = 0; i < rows; i++) {
+                var tr = table3.insertRow();
+                for (let j = 0; j < cols; j++) {
+                    if (table1.rows[i].cells[j].textContent == "") {
+                        table1.rows[i].cells[j].innerHTML = 0;
+                    }
+                    if (table2.rows[i].cells[j].textContent == "") {
+                        table2.rows[i].cells[j].innerHTML = 0;
+                    }
+                    var td = tr.insertCell();
+                    var cellText = document.createTextNode(func(table1.rows[i].cells[j].textContent, table2.rows[i].cells[j].textContent));
+                    td.appendChild(cellText);
+                }
+            }
+        }
+
+        function findInverseMatrix() {
+            document.getElementById("array4").innerHTML = "";
+            var table1 = document.getElementById("array1");
+            var rows1 = table1.rows.length;
+            var cols1 = table1.rows[0].cells.length;
+
+            if (rows1 != cols1) {
+                window.alert("Matrix has to be square");
+                return;
+            }
+            document.getElementById("result").innerHTML = "A <sup>-1</sup>";
+
+            var table3 = document.getElementById("array3");
+            if (table3.rows.length > 0) {
+                $("#array3").empty();
+            }
+
+            for (let i = 0; i < rows1; i++) {
+                for (let j = 0; j < cols1; j++) {
+                    if (table1.rows[i].cells[j].textContent == "") {
+                        table1.rows[i].cells[j].innerHTML = 0;
+                    }
+                }
+            }
+
+            // zamienienie tabeli na tablice  2d
+            var x_matrix = twoDimensionArray(rows1, rows1);
+            for (let i = 0; i < rows1; i++) {
+                for (let j = 0; j < rows1; j++) {
+                    x_matrix[i][j] = parseInt(table1.rows[i].cells[j].textContent);
+
+                }
+            }
+
+            const L_matrix = twoDimensionArray(rows1, rows1);
+            const L_matrixInverse = twoDimensionArray(rows1, rows1);
+            const U_matrixInverse = twoDimensionArray(rows1, rows1);
+
+            GaussMethodLU(x_matrix, L_matrix);
+            findInverseMatrix_U(x_matrix, U_matrixInverse);
+            findInverseMatrix_L(L_matrix, L_matrixInverse);
+
+            var result = matrixMultiply(U_matrixInverse, L_matrixInverse);
+
+            for (let i = 0; i < rows1; i++) {
+                var tr = table3.insertRow();
+                for (let j = 0; j < cols1; j++) {
+                    var td = tr.insertCell();
+                    var cellText = document.createTextNode(round(result[i][j], 3));
+                    td.appendChild(cellText);
+                }
+
+            }
+        }
+
+        function determinate() {
+            document.getElementById("array4").innerHTML = "";
+            var table1 = document.getElementById("array1");
+            var rows1 = table1.rows.length;
+            var cols1 = table1.rows[0].cells.length;
+
+
+            if (rows1 != cols1) {
+                window.alert("Matrix has to be square");
+                return;
+            }
+            var table3 = document.getElementById("array3");
+            if (table3.rows.length > 0) {
+                $("#array3").empty();
+            }
+
+            for (let i = 0; i < rows1; i++) {
+                for (let j = 0; j < cols1; j++) {
+                    if (table1.rows[i].cells[j].textContent == "") {
+                        table1.rows[i].cells[j].innerHTML = 0;
+                    }
+                }
+            }
+
+            // zamienienie tabeli na tablice  2d
+            var x_matrix = twoDimensionArray(rows1, rows1);
+            for (let i = 0; i < rows1; i++) {
+                for (let j = 0; j < rows1; j++) {
+                    x_matrix[i][j] = parseInt(table1.rows[i].cells[j].textContent);
+
+                }
+            }
+
+            var L_matrix = twoDimensionArray(rows1, rows1);
+            GaussMethodLU(x_matrix, L_matrix);
+            var det = 1;
+            for (let i = 0; i < rows1; i++) {
+                det *= x_matrix[i][i];
+            }
+
+            document.getElementById("result").innerHTML = "Det A = " + round(det, 3);
+        }
+
+        function methodLU() {
+            document.getElementById("array4").innerHTML = "";
+            var table1 = document.getElementById("array1");
+            var rows1 = table1.rows.length;
+            var cols1 = table1.rows[0].cells.length;
+
+            if (rows1 != cols1) {
+                window.alert("Matrix has to be square");
+                return;
+            }
+
+            document.getElementById("result").innerHTML = "A = L * U";
+            var table3 = document.getElementById("array3");
+            if (table3.rows.length > 0) {
+                $("#array3").empty();
+            }
+
+            for (let i = 0; i < rows1; i++) {
+                for (let j = 0; j < cols1; j++) {
+                    if (table1.rows[i].cells[j].textContent == "") {
+                        table1.rows[i].cells[j].innerHTML = 0;
+                    }
+                }
+            }
+
+            // zamienienie tabeli na tablice  2d 
+            var x_matrix = twoDimensionArray(rows1, rows1);
+            for (let i = 0; i < rows1; i++) {
+                for (let j = 0; j < rows1; j++) {
+                    x_matrix[i][j] = parseInt(table1.rows[i].cells[j].textContent);
+
+                }
+            }
+
+            const L_matrix = twoDimensionArray(rows1, rows1);
+            GaussMethodLU(x_matrix, L_matrix);
+
+            for (let i = 0; i < rows1; i++) {
+                var tr = table3.insertRow();
+                for (let j = 0; j < cols1; j++) {
+                    var td = tr.insertCell();
+                    var cellText = document.createTextNode(round(x_matrix[i][j], 3));
+                    td.appendChild(cellText);
+                }
+            }
+
+            var body = document.getElementById("array4");
+            var tbl = document.createElement('table');
+            for (let i = 0; i < rows1; i++) {
+                var tr = tbl.insertRow();
+                for (let j = 0; j < cols1; j++) {
+                    var td = tr.insertCell();
+                    var cellText = document.createTextNode(round(L_matrix[i][j], 3));
+                    td.appendChild(cellText);
+                }
+            }
+            body.appendChild(tbl);
+        }
+
+        function transponse() {
+            document.getElementById("array4").innerHTML = "";
+            var table1 = document.getElementById("array1");
+            var rows1 = table1.rows.length;
+            var cols1 = table1.rows[0].cells.length;
+            var table3 = document.getElementById("array3");
+            if (table3.rows.length > 0) {
+                $("#array3").empty();
+            }
+
+            document.getElementById("result").innerHTML = "A <sup>T</sup>";
+            for (let i = 0; i < rows1; i++) {
+                for (let j = 0; j < cols1; j++) {
+                    if (table1.rows[i].cells[j].textContent == "") {
+                        table1.rows[i].cells[j].innerHTML = 0;
+                    }
+                }
+            }
+
+            // zamienienie tabeli na tablice  2d
+            var x_matrix = twoDimensionArray(rows1, cols1);
+            for (let i = 0; i < rows1; i++) {
+                for (let j = 0; j < cols1; j++) {
+                    x_matrix[i][j] = parseInt(table1.rows[i].cells[j].textContent);
+                }
+            }
+
+            const inverse_matrix = twoDimensionArray(cols1, rows1);
+            for (var i = 0; i < cols1; i++) {
+                for (var j = 0; j < rows1; j++) {
+                    inverse_matrix[i][j] = x_matrix[j][i];
+                }
+            }
+
+            for (let i = 0; i < cols1; i++) {
+                var tr = table3.insertRow();
+                for (let j = 0; j < rows1; j++) {
+                    var td = tr.insertCell();
+                    var cellText = document.createTextNode(inverse_matrix[i][j]);
+                    td.appendChild(cellText);
+                }
+            }
+        }
+
+
+        function round(num, precision) {
+            if (Number.isNaN(num)) {
+                return 0;
+            } else {
+                var m = Number((Math.abs(num) * Math.pow(10, precision)).toPrecision(15));
+                return Math.round(m) / Math.pow(10, precision) * Math.sign(num);
+            }
+
+        }
+
+
+        function findInverseMatrix_L(L_matrix, result) {
+            for (let i = 0; i < L_matrix.length; i++) {
+                result[i][i] = 1;
+                for (let j = 0; j < L_matrix.length; j++) {
+                    var sum = 0;
+                    for (let k = j + 1; k < i; k++) {
+                        sum += L_matrix[i][k] * result[k][j];
+                    }
+                    result[i][j] = (L_matrix[i][j] - sum);
+                }
+            }
+            for (let i = 1; i < L_matrix.length; i++) {
+                for (let j = 0; j < i; j++) {
+                    result[i][j] = -result[i][j];
+                }
+            }
+        }
+
+
+        function findInverseMatrix_U(U_matrix, result) {
+            for (let i = 0; i < result.length; i++) {
+                result[i][i] = 1 / U_matrix[i][i];
+                for (let j = i + 1; j < result.length; j++) {
+                    var sum = 0;
+                    for (let k = i; k < j; k++) {
+                        sum += (result[i][k] * U_matrix[k][j]);
+                    }
+                    result[i][j] = -sum / U_matrix[j][j];
+                }
+            }
+            result[result.length - 1][result.length - 1] = 1 / U_matrix[result.length - 1][result.length - 1];
+        }
+
+
+        function matrixMultiply(m1, m2) {
+            var result = twoDimensionArray(m1.length, m1.length);
+            for (let i = 0; i < m1.length; i++) {
+                for (let j = 0; j < m1.length; j++) {
+                    var sum = 0;
+                    for (let k = 0; k < m1.length; k++) {
+                        result[i][j] += m1[i][k] * m2[k][j];
+                    }
+                }
+            }
+            return result;
+
+        }
+
+        function GaussMethodLU(matrix, L) {
+            for (let columns = 0; columns < L.length; columns++) {
+                L[columns][columns] = 1;
+                for (let rows = columns + 1; rows < L.length; rows++) {
+                    var l = Number(matrix[rows][columns] / matrix[columns][columns]);
+                    L[rows][columns] = l;
+                    for (let i = columns; i < L.length; i++) {
+                        matrix[rows][i] = Number(matrix[rows][i] - (matrix[columns][i] * l));
+                    }
+                }
+            }
+        }
+
+        function twoDimensionArray(a, b) {
+            let arr = [];
+            for (let i = 0; i < a; i++) {
+                for (let j = 0; j < b; j++) {
+                    arr[i] = [];
+                }
+            }
+            for (let i = 0; i < a; i++) {
+                for (let j = 0; j < b; j++) {
+                    arr[i][j] = 0;
+                }
+            }
+            return arr;
+        }
+    </script>
+</body>
+
+</html>

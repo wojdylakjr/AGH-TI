@@ -1,0 +1,2 @@
+Project based on profesor's materials with added functionality to add notes and display them. Data is send by POST method to server and saved in database Berkeley DB.
+https://ti-labphp-app1-jw.mybluemix.net/index.php

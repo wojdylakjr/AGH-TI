@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pl">
+
+<head>
+    <title>Formularz</title>
+    <meta charset="UTF-8" />
+
+    <script type="text/javascript">
+            function drawDiagram(data){
+        wiosna  = data["wiosna"];
+        lato  = data["lato"];
+        jesien  = data["jesien"];
+        zima  = data["zima"];
+        canvas = document.getElementById('histogram');
+        var b_context = canvas.getContext("2d");
+          b_context.fillStyle = 'red';
+          b_context.fillRect(50, 50, wiosna, 50);
+          b_context.fillStyle = 'green';
+          b_context.fillRect(50,100,lato, 50);
+          b_context.fillStyle = 'blue';
+          b_context.fillRect(50, 150, jesien, 50);
+          b_context.fillStyle = 'yellow';
+          b_context.fillRect(50,200,zima, 50);
+          b_context.strokeRect(25,15,500,500);
+ 
+        }
+        
+        
+        
+        
+        function sendRequest(event) {
+            event.preventDefault(); // prevent page reload
+            var wybor = document.form1.ulubiona_pora.value;
+            var url = "../cgi-bin/Lab_AJAX_skrypt_send.py";
+            url += "?wybor=" + wybor;
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.addEventListener("load", e => {
+                if (xhr.status == 200) {
+                data = JSON.parse(xhr.responseText);   //wczytaj dane
+                
+                
+                console.log(data);
+                drawDiagram(data);
+                                    
+                }
+            });
+
+            xhr.addEventListener("error", e => {
+                alert("Nie uda³o siê nawi¹zaæ po³¹czenia");
+            });
+
+                    
+            xhr.send();
+        }
+        
+
+    </script>
+</head>
+
+<body>
+    <p>Wybierz swoj¹ ulubion¹ pore roku:</p>
+
+    <form name="form1" onsubmit="return sendRequest(event)">
+        <input type="radio" id="wiosna" name="ulubiona_pora" value="wiosna">
+        <label for="wiosna">Wiosna</label><br>
+        <input type="radio" id="lato" name="ulubiona_pora" value="lato">
+        <label for="lato">Lato</label><br>
+        <input type="radio" id="jesien" name="ulubiona_pora" value="jesien">
+        <label for="jesien">Jesien</label><br>
+        <input type="radio" id="zima" name="ulubiona_pora" value="zima">
+        <label for="zima">Zima</label><br>
+        <input class="btn" type="submit" name="btn" value="Wyslij" />
+    </form>
+    <canvas id="histogram" width = "500px" height = "400px"></canvas>
+
+</body>
+
+</html>

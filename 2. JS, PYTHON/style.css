@@ -1,0 +1,107 @@
+    .menu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        width: 255px;
+    }
+    
+    .menu li {
+        float: left;
+    }
+    
+    .menu input {
+        float: left;
+        display: block;
+        color: #666;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    
+    .menu input:hover:not(.active) {
+        background-color: #ddd;
+    }
+    
+    .menu input.active {
+        color: white;
+        background-color: #04AA6D;
+    }
+
+    input[type=text],
+    input[type=password] {
+        width: 250px;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+    
+    input[type=text]:focus,
+    input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+    
+    input[type=submit].btn {
+        width: 250px;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #b5f0a3;
+    }
+    
+    input[type=submit].btn:hover {
+        background: #62a362;
+    }
+    
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    
+    select {
+        width: 250px;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+    
+    .menu_center {
+        margin: auto;
+        margin-top: 100px;
+        margin-bottom: 20px;
+        width: 280px;
+
+        padding: 10px;
+    }
+    
+    .form_center {
+        margin: auto;
+        width: 280px;
+        border: 3px solid #73AD21;
+        padding: 10px;
+    }
+    
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 500px;
+        margin:auto;
+    }
+    
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }

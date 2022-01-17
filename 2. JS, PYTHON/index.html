@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pl">
+
+<head>
+    <title>Formularz</title>
+    <meta charset="UTF-8" />
+    <link rel="StyleSheet" href="style.css" type="text/css" />
+    <script type="text/javascript">
+        function validate() {
+            if ((document.form1.pole1.value == "") || (document.form1.pole2.value == "") || (document.form1.pole3.value == "") || (document.form1.pole4.value == "")) {
+                alert("Należy wypełnić wszystkie pola wymagane!");
+                return false;
+            } else {
+                var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if (document.form1.pole3.value.match(mailformat)) {
+                    return true;
+                } else {
+                    alert("Niepoprawny e-mail");
+                    return false;
+                }
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <div class="menu_center">
+        <form class="menu">
+            <input class="active" type="submit" name="B1" value="Formularz danych" formaction="index.html" />
+            <input type="submit" name="B1" value="Lista danych" formaction="../cgi-bin/Lab_JS_skrypt_open.py" />
+        </form>
+
+    </div>
+    <div class="form_center">
+        <form name="form1" onsubmit="return validate()" action="../cgi-bin/Lab_JS_skrypt_send.py">
+
+            <div class="container">
+                <label for="pole1"><b>Imie: (*pole wymagane)</b></label><br/>
+                <input id="pole1" type="text" size="20" name="pole1" placeholder="Wpisz imie" required/><br/>
+                <label for="pole2"><b>Nazwisiko: (*pole wymagane)</b></label><br/>
+                <input id="pole2" type="text" size="20" name="pole2" placeholder="Wpisz nazwisko" required/><br/>
+                <label for="pole3"> <b>Adres e-mail: (*pole wymagane)</b></label><br/>
+                <input id="pole3" type="text" size="35" name="pole3" placeholder="Wpisz e-mail" required/><br/>
+                <label><b>Rok studiow: (*pole wymagane)</b> </label><br/>
+                <select id='rok' name="pole4">
+            <option value="0"> Wybierz rok </option>
+            <option value="1"> I </option>
+            <option value="2"> II </option>
+            <option value="3"> III </option>
+            <option value="4"> IV </option>
+            <option value="5"> V </option>
+        </select><br/>
+                <input class="btn" type="submit" name="btn" value="Wyslij" />
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+

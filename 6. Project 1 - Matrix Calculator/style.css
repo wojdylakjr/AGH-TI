@@ -1,0 +1,271 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: Verdana;
+    overflow: auto;
+    height: 100%;
+    margin: 0;
+}
+
+h2 {
+    color: #293d88;
+}
+
+.box {
+    overflow: auto;
+    display: block;
+    position: relative;
+    min-height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* border: 5px outset rgb(79, 138, 177); */
+}
+
+.box::after {
+    height: 100%;
+    content: "";
+    background: url(background.svg);
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.smallBox {
+    display: flex;
+}
+
+table {
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    clear: both;
+}
+
+header {
+    text-align: center;
+    color: #181b2b;
+}
+
+td {
+    border: 2px solid #39a0ca;
+    background-color: #e1f1ff;
+    border-radius: 4px;
+    width: 60px;
+    height: 40px;
+}
+
+input[type="number"] {
+    /* display: block; */
+    padding: 6px 10px;
+    margin: 4px 0;
+    width: 55px;
+    height: 40px;
+    /* left: 550.51px;
+    top: 313px; */
+    background: #ffffff;
+    mix-blend-mode: normal;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    /* box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25); */
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    /* float: left; */
+}
+
+label {
+    /* display: block; */
+    /* position: absolute; */
+    padding: 10px;
+    margin: 4px 0;
+    margin-left: auto;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    /* left: calc(50% - 188.75px/2 - 602.62px);
+    top: calc(50% - 34.67px/2 - 209.67px); */
+    box-shadow: 0px 2px 7px 0px #39a0ca;
+    background: linear-gradient(to bottom, #39a0ca 5%, #006891 100%);
+    background-color: #39a0ca;
+    border: 1px solid #006891;
+    box-sizing: border-box;
+    color: white;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.inputButton {
+    margin: 4px;
+    /* margin-top: 10px; */
+    /* display: block; */
+    width: 100px;
+    height: 40px;
+    margin-left: auto;
+    float: left;
+    box-shadow: 0px 2px 7px 0px #006891;
+    background: linear-gradient(to bottom, #2c80a4 5%, #006891 100%);
+    background-color: #2c80a4;
+    border-radius: 9px;
+    border: 1px solid #006891;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 17px;
+    padding: 10px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #006891;
+}
+
+.inputButton:hover {
+    background: rgb(32, 99, 126);
+    color: white;
+}
+
+.rowsInput {
+    float: left;
+    margin-right: 5px;
+    position: relative;
+    display: flex;
+    /* border: 5px outset rgb(197, 196, 120); */
+}
+
+.colsInput {
+    margin-right: 5px;
+    float: left;
+    position: relative;
+    display: flex;
+    /* border: 5px outset rgb(197, 196, 120); */
+}
+
+.matrixInputs {
+    /* border: 5px outset rgb(197, 196, 120); */
+    margin: auto;
+    padding: 5px;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+}
+
+.resultMatrix {
+    /* width: 60%; */
+    /* border: 5px outset rgb(197, 196, 120); */
+    clear: both;
+    margin: auto;
+    padding: 5px;
+    /* position: relative; */
+    display: block;
+}
+
+.dimensions {
+    float: none;
+}
+
+.matrix1 {
+    /* border: 5px outset rgb(185, 102, 102); */
+    width: 42%;
+    float: left;
+    margin: 5px;
+    /* display: block; */
+    text-align: center;
+    padding-left: 8%;
+    /* display: inline; */
+}
+
+.matrix2 {
+    /* border: 5px outset rgb(118, 156, 69); */
+    width: 42%;
+    float: left;
+    margin: 5px;
+    /* display: block; */
+    text-align: center;
+    padding-right: 8%;
+    /* display: inline; */
+}
+
+.matrix3 {
+    /* border: 5px outset rgb(79, 138, 177); */
+    width: 45%;
+    margin: auto;
+    clear: both;
+    display: block;
+    text-align: center;
+}
+
+.array4 {
+    display: inline-block;
+}
+
+.options {
+    /* border: 5px outset rgb(197, 196, 120); */
+    width: 150px;
+    float: left;
+    margin: 5px;
+    margin-top: 110px;
+    /* display: block; */
+    /* display: inline; */
+}
+
+.oneMatrixOptions {
+    /* border: 5px outset rgb(197, 196, 120); */
+    margin: 5px;
+    padding: 5px;
+    position: relative;
+    text-align: center;
+}
+
+.button1 {
+    /* color: black; */
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    margin: 4px;
+    width: 100%;
+    height: 45px;
+    box-shadow: 0px 2px 7px 0px #d5761c;
+    background: linear-gradient(to bottom, #e68f3e 5%, #d5761c 100%);
+    background-color: #e68f3e;
+    border-radius: 9px;
+    border: 1px solid #d5761c;
+    cursor: pointer;
+    color: #ffffff;
+    padding: 10px 25px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #d5761c;
+}
+
+.button1:hover {
+    background: #D5751C;
+    color: white;
+}
+
+.button2 {
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    margin: 4px;
+    width: 120px;
+    height: 40px;
+    box-shadow: 0px 2px 7px 0px #d5761c;
+    background: linear-gradient(to bottom, #e68f3e 5%, #d5761c 100%);
+    background-color: #e68f3e;
+    border-radius: 9px;
+    border: 1px solid #d5761c;
+    cursor: pointer;
+    color: #ffffff;
+    padding: 10px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #d5761c;
+}
+
+.button2:hover {
+    background: #D5751C;
+    color: white;
+}
